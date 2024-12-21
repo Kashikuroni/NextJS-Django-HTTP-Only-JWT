@@ -1,4 +1,4 @@
-# Project Description
+# IN DEVELOPMENT
 
 A base template for building full-stack applications with **Next.js 15** (frontend) and **Django 5** (backend).
 
