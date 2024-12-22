@@ -42,7 +42,7 @@ export class BaseApi {
    */
   protected async post<D, R>(
     url: string,
-    data: D,
+    data?: D,
     headers?: Record<string, string>,
   ): Promise<R> {
     const config: AxiosRequestConfig = {

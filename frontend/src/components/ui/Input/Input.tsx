@@ -22,7 +22,7 @@ export const BaseInput: React.FC<BaseInputProps> = ({
 
   const labelStyle = classNames("text-sm font-light text-gray-600");
   const inputStyle = classNames(
-    "w-full py-1 text-s px-2 bg-transparent",
+    "w-full text-sm py-1 px-2 bg-transparent",
     "border-2 rounded-md",
     error ? "border-red-500" : "border-gray-300",
     "placeholder-gray-300",

@@ -19,7 +19,7 @@ const BaseInput = ({ id, type = "text", name, label, value, onChange, placeholde
     const [error, setError] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
     const [touched, setTouched] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     const labelStyle = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$classnames$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"])("text-sm font-light text-gray-600");
-    const inputStyle = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$classnames$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"])("w-full py-1 text-s px-2 bg-transparent", "border-2 rounded-md", error ? "border-red-500" : "border-gray-300", "placeholder-gray-300", "hover:ring-blue-400 hover:ring hover:border-transparent", "focus:ring-blue-400 focus:ring focus:border-transparent", "transition-all duration-300 ease-in-out", "appearance-none outline-none");
+    const inputStyle = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$classnames$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"])("w-full text-sm py-1 px-2 bg-transparent", "border-2 rounded-md", error ? "border-red-500" : "border-gray-300", "placeholder-gray-300", "hover:ring-blue-400 hover:ring hover:border-transparent", "focus:ring-blue-400 focus:ring focus:border-transparent", "transition-all duration-300 ease-in-out", "appearance-none outline-none");
     const errorStyle = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$classnames$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"])("absolute text-red-500 text-xs transition-all duration-300 ease-in-out bg-white px-2 py-1 rounded shadow-md", "mt-1 left-0 top-full z-40");
     // Проверка валидности поля
     const validateInput = (input)=>{
@@ -116,19 +116,29 @@ const RegisterForm = ()=>{
         username: "",
         first_name: "",
         last_name: "",
-        password: ""
+        password: "",
+        confirm_password: ""
     });
+    const [error, setError] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
+    const [passwordError, setPasswordError] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
     const handleChange = (e)=>{
         setFormData({
             ...formData,
             [e.target.name]: e.target.value
         });
+        if (e.target.name === "password" || e.target.name === "confirm_password") {
+            setPasswordError(null);
+        }
     };
-    const [error, setError] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
     const handleSubmit = async (e)=>{
         e.preventDefault();
+        if (formData.password !== formData.confirm_password) {
+            setPasswordError("Password do not match.");
+            return;
+        }
         try {
-            await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$backend$2d$api$2f$authApi$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].register(formData);
+            const { confirm_password, ...dataToSend } = formData;
+            await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$backend$2d$api$2f$authApi$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].register(dataToSend);
             router.push("/auth/login");
         } catch (error) {
             if (error instanceof Error) {
@@ -143,15 +153,15 @@ const RegisterForm = ()=>{
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
                 className: "text-xl font-bold mb-3",
-                children: "Регистрация"
+                children: "Registration"
             }, void 0, false, {
                 fileName: "[project]/src/components/Forms/RegisterForm/RegisterForm.tsx",
-                lineNumber: 42,
+                lineNumber: 54,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
                 onSubmit: handleSubmit,
-                className: "flex flex-col gap-2 w-full",
+                className: "flex flex-col gap-1 w-full",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$Input$2f$Input$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BaseInput"], {
                         label: "Email",
@@ -163,11 +173,11 @@ const RegisterForm = ()=>{
                         required: true
                     }, void 0, false, {
                         fileName: "[project]/src/components/Forms/RegisterForm/RegisterForm.tsx",
-                        lineNumber: 44,
+                        lineNumber: 56,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$Input$2f$Input$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BaseInput"], {
-                        label: "Имя пользователя",
+                        label: "Username",
                         type: "text",
                         id: "username",
                         name: "username",
@@ -176,11 +186,11 @@ const RegisterForm = ()=>{
                         required: true
                     }, void 0, false, {
                         fileName: "[project]/src/components/Forms/RegisterForm/RegisterForm.tsx",
-                        lineNumber: 53,
+                        lineNumber: 65,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$Input$2f$Input$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BaseInput"], {
-                        label: "Имя",
+                        label: "First name",
                         type: "text",
                         id: "first_name",
                         name: "first_name",
@@ -189,11 +199,11 @@ const RegisterForm = ()=>{
                         required: true
                     }, void 0, false, {
                         fileName: "[project]/src/components/Forms/RegisterForm/RegisterForm.tsx",
-                        lineNumber: 62,
+                        lineNumber: 74,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$Input$2f$Input$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BaseInput"], {
-                        label: "Фамилия",
+                        label: "Last name",
                         type: "text",
                         id: "last_name",
                         name: "last_name",
@@ -202,11 +212,11 @@ const RegisterForm = ()=>{
                         required: true
                     }, void 0, false, {
                         fileName: "[project]/src/components/Forms/RegisterForm/RegisterForm.tsx",
-                        lineNumber: 71,
+                        lineNumber: 83,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$Input$2f$Input$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BaseInput"], {
-                        label: "Пароль",
+                        label: "Password",
                         type: "password",
                         id: "password",
                         name: "password",
@@ -215,23 +225,44 @@ const RegisterForm = ()=>{
                         required: true
                     }, void 0, false, {
                         fileName: "[project]/src/components/Forms/RegisterForm/RegisterForm.tsx",
-                        lineNumber: 80,
+                        lineNumber: 92,
                         columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$Input$2f$Input$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BaseInput"], {
+                        label: "Confirm Password",
+                        type: "password",
+                        id: "confirm_password",
+                        name: "confirm_password",
+                        value: formData.confirm_password,
+                        onChange: handleChange,
+                        required: true
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/Forms/RegisterForm/RegisterForm.tsx",
+                        lineNumber: 101,
+                        columnNumber: 9
+                    }, this),
+                    passwordError && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "text-red-500 text-xs italic",
+                        children: passwordError
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/Forms/RegisterForm/RegisterForm.tsx",
+                        lineNumber: 111,
+                        columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "flex items-center justify-end mt-4",
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                             className: "w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline",
                             type: "submit",
-                            children: "Зарегистрироваться"
+                            children: "Register"
                         }, void 0, false, {
                             fileName: "[project]/src/components/Forms/RegisterForm/RegisterForm.tsx",
-                            lineNumber: 90,
+                            lineNumber: 114,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/components/Forms/RegisterForm/RegisterForm.tsx",
-                        lineNumber: 89,
+                        lineNumber: 113,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -239,31 +270,31 @@ const RegisterForm = ()=>{
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                 className: "text-gray-400",
-                                children: "Если у вас уже есть аккаунт"
+                                children: "If you already have an account"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Forms/RegisterForm/RegisterForm.tsx",
-                                lineNumber: 98,
+                                lineNumber: 122,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                 onClick: ()=>router.push("/auth/login"),
                                 className: "text-gray-700 font-bold border-b border-transparent hover:border-b hover:border-gray-700 transition-all duration-150 ease-in-out",
-                                children: "Войти"
+                                children: "Login"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Forms/RegisterForm/RegisterForm.tsx",
-                                lineNumber: 99,
+                                lineNumber: 123,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Forms/RegisterForm/RegisterForm.tsx",
-                        lineNumber: 97,
+                        lineNumber: 121,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/Forms/RegisterForm/RegisterForm.tsx",
-                lineNumber: 43,
+                lineNumber: 55,
                 columnNumber: 7
             }, this),
             error && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -271,13 +302,13 @@ const RegisterForm = ()=>{
                 children: error
             }, void 0, false, {
                 fileName: "[project]/src/components/Forms/RegisterForm/RegisterForm.tsx",
-                lineNumber: 107,
+                lineNumber: 131,
                 columnNumber: 17
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/Forms/RegisterForm/RegisterForm.tsx",
-        lineNumber: 41,
+        lineNumber: 53,
         columnNumber: 5
     }, this);
 };

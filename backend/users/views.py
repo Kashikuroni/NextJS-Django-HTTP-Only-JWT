@@ -8,10 +8,45 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 
 from users.types import LoginValidatedData, RefreshValidatedData
 from users.serializers import (
+    RegistrationSerializer,
     LoginSerializer,
     RefreshSerializer,
     UserSerializer
 )
+
+
+class RegistrationView(APIView):
+    """
+    API endpoint for user registration.
+
+    This endpoint allows new users to register by providing
+    email, username, password, first name, and last name.
+    """
+    permission_classes = [AllowAny]
+
+    def post(self, request, *args, **kwargs) -> Response:
+        """
+        Handles user registration.
+
+        Args:
+          request: The HTTP request object containing user data.
+
+        Returns:
+          Response: A JSON response with a success message and status 201
+                    upon successful registration, or an error message with
+                    the appropriate status code.
+        """
+        serializer = RegistrationSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(
+                {"success": True, "message": "Registration successful"},
+                status=status.HTTP_201_CREATED
+            )
+        return Response(
+            {"success": False, "errors": serializer.errors},
+            status=status.HTTP_400_BAD_REQUEST
+        )
 
 
 class LoginView(APIView):

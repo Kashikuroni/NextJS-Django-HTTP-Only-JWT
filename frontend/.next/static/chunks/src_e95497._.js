@@ -90,45 +90,10 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib
 ;
 class AuthApi extends __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$backend$2d$api$2f$baseApi$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BaseApi"] {
     /**
-   * Функция регистрации пользователя в системе.
-   */ async login(data) {
-        try {
-            const response = await this.post("/api/auth/v1/login/", data);
-            return response;
-        } catch (error) {
-            return error;
-        }
-    }
-    /**
-   * Проверка токена на валидность.
-   */ async checkToken() {
-        // try {
-        await this.get("/api/auth/v1/users/");
-    // } catch (error) {
-    //   if (axios.isAxiosError(error)) {
-    //     if (error.status == 401) {
-    //       throw new Error("Unauthorized");
-    //     }
-    //   } else {
-    //     throw new Error(`Не известная ошибка! ${error}`);
-    //   }
-    // }
-    }
-    /**
-   * Функция выхода из системы с удалением токена с базы
-   */ async logout() {
-        try {
-            const response = await this.post("/api/auth/token/logout/", {});
-            return response;
-        } catch (error) {
-            return error;
-        }
-    }
-    /**
    * Функция авторизации пользователя в системе
    */ async register(data) {
         try {
-            const response = await this.post(`api/v1/register/`, data);
+            const response = await this.post(`api/auth/v1/register/`, data);
             return response;
         } catch (error) {
             if (__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].isAxiosError(error)) {
@@ -142,6 +107,74 @@ class AuthApi extends __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$ser
                 }
             }
         }
+    }
+    /**
+   * Функция регистрации пользователя в системе.
+   */ async login(data) {
+        const response = await this.post("/api/auth/v1/login/", data);
+        return response;
+    }
+    /**
+   * Функция выхода из системы с удалением токена с базы
+   */ async logout() {
+        const response = await this.post("/api/auth/token/logout/", {});
+        return response;
+    }
+    /**
+   * Fetches user data from the backend API.
+   *
+   * @returns {Promise<any>} The user data returned from the backend.
+   *
+   * @throws Will throw an error if the API request fails.
+   *
+   * Note: This function does not handle errors internally.
+   * Ensure that you wrap the call to this function in a `try-catch` block
+   * or use a `.catch()` method to handle potential errors.
+   *
+   * Example usage:
+   * ```ts
+   * try {
+   *   const user = await userService.getUser();
+   *   console.log(user);
+   * } catch (error) {
+   *   console.error("Failed to fetch user data:", error);
+   * }
+   * ```
+   */ async getUser() {
+        const response = await this.get("/api/auth/v1/users/");
+        return response;
+    }
+    /**
+   * Refreshes the access token using the refresh token stored in cookies.
+   *
+   * This function sends a POST request to the backend API endpoint
+   * to refresh the tokens. It expects the backend to manage tokens via HttpOnly cookies.
+   *
+   * @returns {Promise<void>} Resolves when the token is successfully refreshed.
+   *
+   * @throws Will throw an error if the refresh token is missing or the refresh process fails.
+   *
+   * Note: This function assumes that HttpOnly cookies are automatically handled
+   * by the browser or client during the request.
+   *
+   * Example usage:
+   * ```ts
+   * try {
+   *   await authService.refreshToken();
+   *   console.log("Token refreshed successfully.");
+   * } catch (error) {
+   *   console.error("Failed to refresh token:", error);
+   * }
+   * ```
+   */ async refreshToken() {
+        const response = await this.post("/api/auth/v1/refresh/");
+        if (!response || typeof response.success !== "boolean") {
+            throw new Error("Invalid response format.");
+        }
+        if (!response.success) {
+            throw new Error(response.message || "Failed to refresh token.");
+        }
+        return response;
     }
     /**
    * Смена пароля.
@@ -183,6 +216,7 @@ const AuthProvider = ({ children })=>{
     _s();
     const [isAuthenticated, setIsAuthenticated] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(true);
+    const [user, setUser] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     const router = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRouter"])();
     const pathname = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["usePathname"])();
     const acceptUrl = [
@@ -191,23 +225,31 @@ const AuthProvider = ({ children })=>{
     ];
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "AuthProvider.useEffect": ()=>{
-            const verifyAuth = {
-                "AuthProvider.useEffect.verifyAuth": async ()=>{
+            ({
+                "AuthProvider.useEffect": async ()=>{
+                    setLoading(true);
                     if (acceptUrl.includes(pathname)) {
                         setLoading(false);
-                        return; // Не проверяем токен на страницах входа и регистрации
+                        return;
                     }
                     try {
-                        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$backend$2d$api$2f$authApi$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].checkToken();
+                        const userData = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$backend$2d$api$2f$authApi$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].getUser();
+                        setUser(userData);
                         setIsAuthenticated(true);
                     } catch (error) {
-                        router.push("/auth/login/");
+                        try {
+                            await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$backend$2d$api$2f$authApi$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].refreshToken();
+                            const userData = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$backend$2d$api$2f$authApi$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].getUser();
+                            setUser(userData);
+                            setIsAuthenticated(true);
+                        } catch  {
+                            router.push("/auth/login/");
+                        }
                     } finally{
                         setLoading(false);
                     }
                 }
-            }["AuthProvider.useEffect.verifyAuth"];
-            verifyAuth();
+            })["AuthProvider.useEffect"]();
         }
     }["AuthProvider.useEffect"], [
         pathname
@@ -215,16 +257,17 @@ const AuthProvider = ({ children })=>{
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(AuthContext.Provider, {
         value: {
             isAuthenticated,
-            loading
+            loading,
+            user
         },
         children: !loading && children
     }, void 0, false, {
         fileName: "[project]/src/context/AuthProvider.tsx",
-        lineNumber: 42,
+        lineNumber: 53,
         columnNumber: 5
     }, this);
 };
-_s(AuthProvider, "b27MQcDcfT+582550+PVcMxGskI=", false, function() {
+_s(AuthProvider, "pM86J5bndD9YVT3Br1QDbNUFez4=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRouter"],
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["usePathname"]

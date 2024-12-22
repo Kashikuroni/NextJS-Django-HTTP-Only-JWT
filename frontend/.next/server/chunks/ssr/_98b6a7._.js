@@ -19,7 +19,7 @@ const BaseInput = ({ id, type = "text", name, label, value, onChange, placeholde
     const [error, setError] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
     const [touched, setTouched] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     const labelStyle = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$classnames$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"])("text-sm font-light text-gray-600");
-    const inputStyle = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$classnames$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"])("w-full py-1 text-s px-2 bg-transparent", "border-2 rounded-md", error ? "border-red-500" : "border-gray-300", "placeholder-gray-300", "hover:ring-blue-400 hover:ring hover:border-transparent", "focus:ring-blue-400 focus:ring focus:border-transparent", "transition-all duration-300 ease-in-out", "appearance-none outline-none");
+    const inputStyle = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$classnames$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"])("w-full text-sm py-1 px-2 bg-transparent", "border-2 rounded-md", error ? "border-red-500" : "border-gray-300", "placeholder-gray-300", "hover:ring-blue-400 hover:ring hover:border-transparent", "focus:ring-blue-400 focus:ring focus:border-transparent", "transition-all duration-300 ease-in-out", "appearance-none outline-none");
     const errorStyle = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$classnames$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"])("absolute text-red-500 text-xs transition-all duration-300 ease-in-out bg-white px-2 py-1 rounded shadow-md", "mt-1 left-0 top-full z-40");
     // Проверка валидности поля
     const validateInput = (input)=>{
@@ -126,7 +126,6 @@ const LoginForm = ()=>{
         e.preventDefault();
         try {
             const data = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$backend$2d$api$2f$authApi$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].login(formData);
-            localStorage.setItem("userToken", data.auth_token);
             router.push("/");
         } catch (error) {
             setError(error);
@@ -144,7 +143,7 @@ const LoginForm = ()=>{
                 children: "Вход"
             }, void 0, false, {
                 fileName: "[project]/src/components/Forms/LoginForm/LoginForm.tsx",
-                lineNumber: 39,
+                lineNumber: 38,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
@@ -160,7 +159,7 @@ const LoginForm = ()=>{
                         onChange: handleChange
                     }, void 0, false, {
                         fileName: "[project]/src/components/Forms/LoginForm/LoginForm.tsx",
-                        lineNumber: 41,
+                        lineNumber: 40,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$Input$2f$Input$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BaseInput"], {
@@ -172,7 +171,7 @@ const LoginForm = ()=>{
                         onChange: handleChange
                     }, void 0, false, {
                         fileName: "[project]/src/components/Forms/LoginForm/LoginForm.tsx",
-                        lineNumber: 49,
+                        lineNumber: 48,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -184,7 +183,7 @@ const LoginForm = ()=>{
                                 children: "Войти"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Forms/LoginForm/LoginForm.tsx",
-                                lineNumber: 58,
+                                lineNumber: 57,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -194,25 +193,25 @@ const LoginForm = ()=>{
                                 children: "Зарегистрироваться"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Forms/LoginForm/LoginForm.tsx",
-                                lineNumber: 64,
+                                lineNumber: 63,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Forms/LoginForm/LoginForm.tsx",
-                        lineNumber: 57,
+                        lineNumber: 56,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/Forms/LoginForm/LoginForm.tsx",
-                lineNumber: 40,
+                lineNumber: 39,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/Forms/LoginForm/LoginForm.tsx",
-        lineNumber: 38,
+        lineNumber: 37,
         columnNumber: 5
     }, this);
 };

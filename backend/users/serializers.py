@@ -6,8 +6,33 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.exceptions import TokenError, InvalidToken
 from rest_framework.exceptions import AuthenticationFailed
 
+from users.models import CustomUsers
+
 
 User = get_user_model()
+
+
+class RegistrationSerializer(serializers.ModelSerializer):
+    """
+    Serializer for user registration.
+
+    This serializer validates user input and creates a new user in the system.
+    """
+    password = serializers.CharField(write_only=True, min_length=8)
+
+    class Meta:
+        model = CustomUsers
+        fields = ['email', 'username', 'password', 'first_name', 'last_name']
+
+    def create(self, validated_data):
+        user = CustomUsers.objects.create_user(
+            email=validated_data['email'],
+            username=validated_data['username'],
+            password=validated_data['password'],
+            first_name=validated_data.get('first_name', ''),
+            last_name=validated_data.get('last_name', '')
+        )
+        return user
 
 
 class LoginSerializer(serializers.Serializer):

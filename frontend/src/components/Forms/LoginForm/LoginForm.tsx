@@ -23,7 +23,6 @@ export const LoginForm: React.FC = () => {
     e.preventDefault();
     try {
       const data = await api.login(formData);
-      localStorage.setItem("userToken", data.auth_token);
       router.push("/");
     } catch (error) {
       setError(error as string);
