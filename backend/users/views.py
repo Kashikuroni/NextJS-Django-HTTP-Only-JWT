@@ -250,3 +250,29 @@ class CurrentUserView(APIView):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class DeleteUserView(APIView):
+    """
+    API endpoint for deleting the authenticated user's account.
+
+    This view allows a user to delete their own account permanently.
+    """
+    permission_classes = [IsAuthenticated]
+
+    def delete(self, request):
+        """
+        Deletes the authenticated user's account.
+
+        Args:
+            request: The HTTP request object.
+
+        Returns:
+            Response: A JSON response with a success message and status 204.
+        """
+        user = request.user
+        user.delete()
+        return Response(
+            {"success": True, "message": "Your account has been deleted"},
+            status=status.HTTP_204_NO_CONTENT
+        )

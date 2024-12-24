@@ -57,7 +57,12 @@ const ProfileForm: React.FC = () => {
 
   return (
     <div className="flex h-full justify-center items-center gap-4 p-4">
-      <ImageUploader width="w-52" height="h-52" imageUrl={user?.avatar || "/default-avatar.png"} onUpload={handleFileUpload} />
+      <ImageUploader
+        width="w-52"
+        height="h-52"
+        imageUrl={user?.avatar || "/default-avatar.png"}
+        onUpload={handleFileUpload}
+      />
       <div className="flex flex-col h-full justify-center w-full">
         <form onSubmit={handleSubmit} className="flex flex-col gap-2">
           <BaseInput
@@ -68,20 +73,20 @@ const ProfileForm: React.FC = () => {
             onChange={handleChange}
           />
           <div className="flex gap-2">
-          <BaseInput
-            label="First name"
-            id="firstName"
-            name="firstName"
-            value={formData.firstName}
-            onChange={handleChange}
-          />
-          <BaseInput
-            label="Last name"
-            id="lastName"
-            name="lastName"
-            value={formData.lastName}
-            onChange={handleChange}
-          />
+            <BaseInput
+              label="First name"
+              id="firstName"
+              name="firstName"
+              value={formData.firstName}
+              onChange={handleChange}
+            />
+            <BaseInput
+              label="Last name"
+              id="lastName"
+              name="lastName"
+              value={formData.lastName}
+              onChange={handleChange}
+            />
           </div>
           <p className="text-gray-600 text-sm">{user?.email}</p>
           <button

@@ -276,7 +276,7 @@ const ProfileForm = ()=>{
                             onChange: handleChange
                         }, void 0, false, {
                             fileName: "[project]/src/components/Forms/Profile/ProfileForm.tsx",
-                            lineNumber: 63,
+                            lineNumber: 68,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -290,8 +290,8 @@ const ProfileForm = ()=>{
                                     onChange: handleChange
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/Forms/Profile/ProfileForm.tsx",
-                                    lineNumber: 71,
-                                    columnNumber: 11
+                                    lineNumber: 76,
+                                    columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$Input$2f$Input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BaseInput"], {
                                     label: "Last name",
@@ -301,13 +301,13 @@ const ProfileForm = ()=>{
                                     onChange: handleChange
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/Forms/Profile/ProfileForm.tsx",
-                                    lineNumber: 78,
-                                    columnNumber: 11
+                                    lineNumber: 83,
+                                    columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/Forms/Profile/ProfileForm.tsx",
-                            lineNumber: 70,
+                            lineNumber: 75,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -315,7 +315,7 @@ const ProfileForm = ()=>{
                             children: user?.email
                         }, void 0, false, {
                             fileName: "[project]/src/components/Forms/Profile/ProfileForm.tsx",
-                            lineNumber: 86,
+                            lineNumber: 91,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -324,18 +324,18 @@ const ProfileForm = ()=>{
                             children: "Save"
                         }, void 0, false, {
                             fileName: "[project]/src/components/Forms/Profile/ProfileForm.tsx",
-                            lineNumber: 87,
+                            lineNumber: 92,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/Forms/Profile/ProfileForm.tsx",
-                    lineNumber: 62,
+                    lineNumber: 67,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/components/Forms/Profile/ProfileForm.tsx",
-                lineNumber: 61,
+                lineNumber: 66,
                 columnNumber: 7
             }, this)
         ]

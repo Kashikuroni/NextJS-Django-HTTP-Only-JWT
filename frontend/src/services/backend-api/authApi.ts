@@ -44,6 +44,11 @@ class AuthApi extends BaseApi {
     return response;
   }
 
+  public async deleteAccount(): Promise<any> {
+    const response = await this.delete("/api/auth/v1/users/delete/");
+    return response;
+  }
+
   /**
    * Fetches user data from the backend API.
    *

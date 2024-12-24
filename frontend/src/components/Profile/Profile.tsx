@@ -21,6 +21,20 @@ const UserProfile: React.FC = () => {
     })();
   };
 
+  const handleDelete = async () => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete your account? This action cannot be undone.",
+    );
+    if (confirmDelete) {
+      try {
+        await api.deleteAccount();
+        router.push("/auth/login");
+      } catch (error) {
+        console.error("Failed to delete account:", error);
+      }
+    }
+  };
+
   return (
     <div className="flex items-center gap-4 p-4">
       <img
@@ -44,12 +58,21 @@ const UserProfile: React.FC = () => {
           </div>
           <p>{user?.email}</p>
         </div>
+        <div className="flex gap-2">
         <button
-          className="bg-red-500 text-white font-bold px-5 py-2 rounded-lg"
+          className="bg-red-500 text-white font-bold px-5 py-1 rounded-lg"
           onClick={handleLogout}
         >
           Logout
         </button>
+        <button
+          className="bg-red-500 text-white font-bold px-5 py-1 rounded-lg hover:bg-red-600"
+          onClick={handleDelete}
+        >
+          Delete Account
+        </button>
+
+        </div>
       </div>
     </div>
   );
