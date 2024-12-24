@@ -71,7 +71,9 @@ class AuthApi extends BaseApi {
    * ```
    */
   public async getUser(): Promise<any> {
-    const response = await this.get("/api/auth/v1/users/");
+    const response = await this.get("/api/auth/v1/users/", {
+      "Cache-Control": "no-store",
+    });
     return response;
   }
 

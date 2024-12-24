@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from "axios";
 
 export class BaseApi {
-  protected api: AxiosInstance;
+  public api: AxiosInstance;
 
   constructor() {
     const baseURL =
@@ -24,13 +24,6 @@ export class BaseApi {
       "Content-Type": "application/json",
     };
 
-    const token = localStorage.getItem("userToken");
-    if (token) {
-      defaultHeaders.Authorization = `Token ${token}`;
-    }
-    // Сначала в конечный headers попадет все что находиться
-    // в defaultHeaders, потом все что в headers, причем одинаковые ключи
-    // будут перезаписаны значением из headers. Такие как Content-Type например
     return { ...defaultHeaders, ...headers };
   }
 

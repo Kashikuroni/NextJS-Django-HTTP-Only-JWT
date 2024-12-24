@@ -7,7 +7,7 @@ import ImageUploader from "@/components/ui/Uploaders/ImageUploader";
 import { BaseInput } from "@/components/ui/Input/Input";
 
 const ProfileForm: React.FC = () => {
-  const { user } = useAuth();
+  const { user, refreshUser } = useAuth();
   const router = useRouter();
   const [formData, setFormData] = useState({
     username: "",
@@ -49,6 +49,7 @@ const ProfileForm: React.FC = () => {
 
     try {
       await api.updateProfile(data);
+      await refreshUser()
       router.push("/profile/"); // Перенаправление на страницу профиля
     } catch (error) {
       console.error("Failed to update profile:", error);

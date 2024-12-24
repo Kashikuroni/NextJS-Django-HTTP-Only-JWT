@@ -1,55 +1,48 @@
 "use client";
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { useRouter, usePathname } from "next/navigation";
 import api from "@/services/backend-api/authApi";
-import { User } from "./AuthProvider.types"
-import { acceptUrls, loginUrl } from "@/services/constants/urls";
+import { User } from "./AuthProvider.types";
 
 type AuthContextType = {
+  user: User | null;
   isAuthenticated: boolean;
   loading: boolean;
-  user: User | null;
+  refreshUser: () => Promise<void>;
+  clearAuth: () => void;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+  const [user, setUser] = useState<User | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState<User | null>(null)
-  const router = useRouter();
-  const pathname = usePathname();
+
+  const refreshUser = async () => {
+    try {
+      const userData = await api.getUser();
+      setUser(userData);
+      setIsAuthenticated(true);
+    } catch (error) {
+      console.error("Failed to refresh user data:", error);
+      setUser(null);
+      setIsAuthenticated(false);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const clearAuth = () => {
+    setUser(null);
+    setIsAuthenticated(false);
+  };
 
   useEffect(() => {
-    (async () => {
-      setLoading(true)
-      if (acceptUrls.includes(pathname)) {
-        setLoading(false);
-        return;
-      }
-      
-      try {
-        const userData = await api.getUser();
-        setUser(userData)
-        setIsAuthenticated(true);
-      } catch (error) {
-        try {
-          await api.refreshToken()
-
-          const userData = await api.getUser();
-          setUser(userData)
-          setIsAuthenticated(true);
-        } catch {
-          router.push(loginUrl);
-        }
-      } finally {
-        setLoading(false);
-      }
-    })();
-  }, [pathname]);
+    refreshUser(); // Загружаем данные пользователя при монтировании провайдера
+  }, []);
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, loading, user }}>
+    <AuthContext.Provider value={{ user, isAuthenticated, loading, refreshUser, clearAuth }}>
       {children}
     </AuthContext.Provider>
   );

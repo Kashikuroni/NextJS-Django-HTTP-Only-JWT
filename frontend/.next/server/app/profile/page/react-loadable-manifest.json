@@ -2,8 +2,8 @@
   "src/app/profile/page.tsx -> @/components/Profile/UserProfile": {
     "id": "src/app/profile/page.tsx -> @/components/Profile/UserProfile",
     "files": [
-      "static/chunks/node_modules_7d9fa1._.js",
-      "static/chunks/src_8d8efb._.js",
+      "static/chunks/node_modules_f799c9._.js",
+      "static/chunks/src_08e10d._.js",
       "static/chunks/src_components_Profile_UserProfile_tsx_454d32._.js"
     ]
   }

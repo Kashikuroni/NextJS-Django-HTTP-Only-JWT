@@ -23,6 +23,7 @@ class RegistrationView(APIView):
     This endpoint allows new users to register by providing
     email, username, password, first name, and last name.
     """
+    authentication_classes = []
     permission_classes = [AllowAny]
 
     def post(self, request, *args, **kwargs) -> Response:
@@ -58,6 +59,7 @@ class LoginView(APIView):
     Upon successful authentication, it generates and sets
     HttpOnly cookies for access and refresh tokens.
     """
+    authentication_classes = []
     permission_classes = [AllowAny]
     
     def post(self, request, *args, **kwargs) -> Response:

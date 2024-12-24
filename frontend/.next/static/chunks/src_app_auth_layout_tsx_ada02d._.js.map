@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 7, "column": 0}, "map": {"version":3,"sources":["file:///Users/mrowlise/kashikuroni_tech/base_project_tamplate/frontend/src/app/auth/layout.tsx"],"sourcesContent":["\"use client\";\nexport default function RootLayout({\n  children,\n}: Readonly<{\n  children: React.ReactNode;\n}>) {\n  return (\n    <div className=\"flex h-screen justify-center items-center bg-gray-100\">\n      <div className=\"bg-white border border-gray-300 px-10 py-5 rounded-3xl\">\n        {children}\n      </div>\n    </div>\n  );\n}\n"],"names":[],"mappings":";;;;AAAA;;AACe,SAAS,WAAW,EACjC,QAAQ,EAGR;IACA,qBACE,6LAAC;QAAI,WAAU;kBACb,cAAA,6LAAC;YAAI,WAAU;sBACZ;;;;;;;;;;;AAIT;KAZwB"}},
+    {"offset": {"line": 36, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}
