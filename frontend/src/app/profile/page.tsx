@@ -1,13 +1,12 @@
 import React from "react";
-import UserProfile from "@/components/Profile/Profile";
+import dynamic from "next/dynamic";
 
-const LoginPage: React.FC = () => {
+const DynamicUserProfile = dynamic(
+  () => import("@/components/Profile/UserProfile"),
+);
 
-  return (
-    <>
-      <UserProfile />
-    </>
-  );
+const UserProfilePage: React.FC = () => {
+  return <DynamicUserProfile />;
 };
 
-export default LoginPage;
+export default UserProfilePage;

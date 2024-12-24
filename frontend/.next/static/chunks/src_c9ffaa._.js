@@ -128,7 +128,7 @@ const UserProfile = ()=>{
                         className: "flex gap-2",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                className: "bg-red-500 text-white font-bold px-5 py-1 rounded-lg",
+                                className: "border border-red-500 text-red-500 font-bold px-5 py-1 rounded-lg hover:text-white hover:border-transparent hover:bg-red-500 transition-all duration-200 ease-in-out",
                                 onClick: handleLogout,
                                 children: "Logout"
                             }, void 0, false, {
@@ -137,7 +137,7 @@ const UserProfile = ()=>{
                                 columnNumber: 9
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                className: "bg-red-500 text-white font-bold px-5 py-1 rounded-lg hover:bg-red-600",
+                                className: "border border-transparent bg-red-500 text-white font-bold px-5 py-1 rounded-lg hover:bg-transparent hover:text-red-500 hover:border hover:border-red-500 transition-all duration-200 ease-in-out",
                                 onClick: handleDelete,
                                 children: "Delete Account"
                             }, void 0, false, {

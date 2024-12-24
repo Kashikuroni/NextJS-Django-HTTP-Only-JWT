@@ -1,0 +1,9 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 7, "column": 0}, "map": {"version":3,"sources":["file:///Users/mrowlise/kashikuroni_tech/base_project_tamplate/frontend/src/app/profile/page.tsx"],"sourcesContent":["import React from \"react\";\nimport dynamic from \"next/dynamic\";\n\nconst DynamicUserProfile = dynamic(\n  () => import(\"@/components/Profile/UserProfile\"),\n);\n\nconst UserProfilePage: React.FC = () => {\n  return <DynamicUserProfile />;\n};\n\nexport default UserProfilePage;\n"],"names":[],"mappings":";;;;AACA;;;AAEA,MAAM,qBAAqB,CAAA,GAAA,+JAAA,CAAA,UAAO,AAAD,EAC/B;;;;;;;AAGF,MAAM,kBAA4B;IAChC,qBAAO,8OAAC;;;;;AACV;uCAEe"}},
+    {"offset": {"line": 29, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}},
+    {"offset": {"line": 40, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":""}},
+    {"offset": {"line": 40, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

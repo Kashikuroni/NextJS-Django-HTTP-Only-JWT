@@ -1,5 +1,17 @@
 {
-  "node": {},
+  "node": {
+    "7f3fef420d634de380d8d10b093aaa94a4e1623348": {
+      "workers": {
+        "app/profile/update/page": {
+          "moduleId": "[project]/.next-internal/server/app/profile/update/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/app/profile/update/page.tsx [app-rsc] (ecmascript)\" } [app-rsc] (ecmascript)",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/profile/update/page": "rsc"
+      }
+    }
+  },
   "edge": {},
   "encryptionKey": "B0+fTSlOCXGCrJGRPJ2RANazeYmecoviFi76BX1cY/E="
 }

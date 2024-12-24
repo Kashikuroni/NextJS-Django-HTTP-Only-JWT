@@ -283,7 +283,7 @@ class AuthApi extends __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$ser
     /**
    * Функция выхода из системы с удалением токена с базы
    */ async logout() {
-        const response = await this.post("/api/auth/v1/logout/", {});
+        const response = await this.post("/api/auth/v1/logout/");
         return response;
     }
     async deleteAccount() {

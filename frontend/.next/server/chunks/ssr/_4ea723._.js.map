@@ -1,0 +1,9 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 7, "column": 0}, "map": {"version":3,"sources":["file:///Users/mrowlise/kashikuroni_tech/base_project_tamplate/frontend/src/app/profile/update/page.tsx"],"sourcesContent":["\"use server\";\nimport React from \"react\";\nimport dynamic from \"next/dynamic\";\nconst DynamicProfileForm = dynamic(\n  () => import(\"@/components/Forms/Profile/ProfileForm\"),\n);\n\nconst UpdateProfilePage: React.FC = () => {\n  return (\n    <>\n      <DynamicProfileForm />\n    </>\n  );\n};\n\nexport default UpdateProfilePage;\n"],"names":[],"mappings":";;;;;;AAEA;;;;;;AACA,MAAM,qBAAqB,CAAA,GAAA,+JAAA,CAAA,UAAO,AAAD,EAC/B;;;;;;;AAGF,MAAM,oBAA8B;IAClC,qBACE;kBACE,cAAA,8OAAC;;;;;;AAGP;uCAEe,uCAAe,GAAf;;;IAAA;;AAAA,+OAAA"}},
+    {"offset": {"line": 41, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}},
+    {"offset": {"line": 53, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":""}},
+    {"offset": {"line": 55, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

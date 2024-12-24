@@ -1,8 +1,9 @@
 "use client";
-import TextGradient from "@/components/ui/GradientText/GradientText";
-import { useAuth } from "@/context/AuthProvider";
 import { useRouter } from "next/navigation";
 import { LuLoaderCircle } from "react-icons/lu";
+
+import TextGradient from "@/components/ui/GradientText/GradientText";
+import { useAuth } from "@/context/AuthProvider";
 
 export default function Home() {
   const { isAuthenticated } = useAuth();
@@ -11,13 +12,13 @@ export default function Home() {
   if (!isAuthenticated) {
     return (
       <div className="flex flex-col h-screen text-blue-400 font-bold justify-center items-center">
-        <LuLoaderCircle className="w-32 h-32 animate-spin" />
+        <LuLoaderCircle className="w-28 h-28 animate-spin" />
 
         <span className="text-2xl">
           <TextGradient
             from="from-blue-500"
-            via="via-purple-500"
-            to="to-pink-500"
+            via="via-blue-200"
+            to="to-blue-500"
           >
             Loading...
           </TextGradient>
@@ -28,7 +29,7 @@ export default function Home() {
 
   return (
     <div className="flex h-screen justify-center items-center bg-gray-100">
-      <div className="flex flex-col bg-white justify-center border border-gray-300 px-10 py-5 rounded-xl">
+      <div className="flex flex-col bg-white justify-center border border-gray-300 mx-5 px-10 py-5 rounded-3xl">
         <h1 className="text-2xl text-nowrap font-bold">
           Welcome to the Next.js + Django Base Template!
         </h1>

@@ -40,7 +40,7 @@ class AuthApi extends BaseApi {
    * Функция выхода из системы с удалением токена с базы
    */
   public async logout(): Promise<any> {
-    const response = await this.post("/api/auth/v1/logout/", {});
+    const response = await this.post("/api/auth/v1/logout/");
     return response;
   }
 
