@@ -12,6 +12,21 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      keyframes: {
+        animatedgradient: {
+          "0%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+          "100%": { backgroundPosition: "0% 50%" },
+        },
+      },
+      backgroundSize: {
+        "300%": "300%",
+      },
+      animation: {
+        gradient: "animatedgradient 6s ease infinite alternate",
+        "spin-gradient":
+          "spin 3s linear infinite, animatedgradient 6s ease infinite alternate",
+      },
     },
   },
   plugins: [],

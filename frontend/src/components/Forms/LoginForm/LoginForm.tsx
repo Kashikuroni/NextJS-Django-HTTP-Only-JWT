@@ -35,7 +35,7 @@ export const LoginForm: React.FC = () => {
 
   return (
     <div className="flex flex-col items-center justify-center max-w-70">
-      <h2 className="text-2xl font-bold mb-5">Вход</h2>
+      <h2 className="text-2xl font-bold mb-2">Вход</h2>
       <form onSubmit={handleSubmit} className="flex flex-col gap-3">
         <BaseInput
           label="Email"

@@ -1,6 +1,7 @@
 import uuid
 from typing import Optional
 
+from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import (
     AbstractBaseUser,
@@ -77,6 +78,12 @@ class CustomUsers(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(_("Username"), max_length=150, unique=True)
     first_name = models.CharField(_("First Name"), max_length=150, blank=True)
     last_name = models.CharField(_("Last Name"), max_length=150, blank=True)
+    avatar = models.ImageField(
+        _("Avatar"),
+        upload_to="avatars/",
+        blank=True,
+        null=True
+    )
 
     is_active = models.BooleanField(_("Active"), default=True)  # pyright: ignore
     is_staff = models.BooleanField(_("Staff"), default=False)  # pyright: ignore
@@ -93,3 +100,8 @@ class CustomUsers(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self) -> str:
         return f"{self.email}"
+
+    def get_avatar_url(self):
+        if self.avatar:
+            return f"{settings.MEDIA_URL}{self.avatar}"
+        return "/default-avatar.png"

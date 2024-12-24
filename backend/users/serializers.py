@@ -22,15 +22,15 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUsers
-        fields = ['email', 'username', 'password', 'first_name', 'last_name']
+        fields = ["email", "username", "password", "first_name", "last_name"]
 
     def create(self, validated_data):
         user = CustomUsers.objects.create_user(
-            email=validated_data['email'],
-            username=validated_data['username'],
-            password=validated_data['password'],
-            first_name=validated_data.get('first_name', ''),
-            last_name=validated_data.get('last_name', '')
+            email=validated_data["email"],
+            username=validated_data["username"],
+            password=validated_data["password"],
+            first_name=validated_data.get("first_name", ""),
+            last_name=validated_data.get("last_name", "")
         )
         return user
 
@@ -47,26 +47,26 @@ class LoginSerializer(serializers.Serializer):
     password = serializers.CharField(write_only=True)
     
     def validate(self, attrs: Any) -> dict:
-        email: str = attrs.get('email')
-        password: str = attrs.get('password')
+        email: str = attrs.get("email")
+        password: str = attrs.get("password")
         
         if email and password:
             user = authenticate(
-                request=self.context.get('request'),
+                request=self.context.get("request"),
                 email=email,
                 password=password
             )
             if not user:
-                raise AuthenticationFailed('Invalid credentials')
+                raise AuthenticationFailed("Invalid credentials")
         else:
-            raise AuthenticationFailed('Email and password is required')
+            raise AuthenticationFailed("Email and password is required")
         
         refresh: RefreshToken = RefreshToken.for_user(user)  # pyright: ignore
         access_token = refresh.access_token
         
         return {
-            'refresh': str(refresh),
-            'access': access_token,
+            "refresh": str(refresh),
+            "access": access_token,
         }
 
 
@@ -80,12 +80,12 @@ class RefreshSerializer(serializers.Serializer):
     refresh = serializers.CharField()
     
     def validate(self, attrs: Any) -> dict:
-        refresh_token = attrs.get('refresh')
+        refresh_token = attrs.get("refresh")
         try:
             refresh: RefreshToken = RefreshToken(refresh_token)
             refresh.verify()
             
-            user_id = refresh.get('user_id')
+            user_id = refresh.get("user_id")
             user = User.objects.get(id=user_id)
 
             access_token: str = str(refresh.access_token)
@@ -94,8 +94,8 @@ class RefreshSerializer(serializers.Serializer):
             raise InvalidToken(e.args[0])
         
         return {
-            'access': access_token,
-            'refresh': str(new_refresh),
+            "access": access_token,
+            "refresh": str(new_refresh),
         }
 
 
@@ -106,6 +106,19 @@ class UserSerializer(serializers.ModelSerializer):
     This serializer converts user model instances into JSON format
     and vice versa. It includes fields for basic user information.
     """
+    avatar = serializers.ImageField(required=False, allow_null=True)
+
     class Meta:
         model = User
-        fields = ['id', 'email', 'username', 'first_name', 'last_name']
+        fields = [
+            "id", "email", "username",
+            "first_name", "last_name", "avatar"
+        ]
+
+    def get_avatar(self, obj):
+        request = self.context.get("request")
+        if not request:
+            return None
+        if obj.avatar:
+            return request.build_absolute_uri(obj.avatar.url)
+        return request.build_absolute_uri("/default-avatar.png")

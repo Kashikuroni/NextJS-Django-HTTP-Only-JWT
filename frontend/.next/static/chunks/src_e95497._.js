@@ -71,6 +71,28 @@ class BaseApi {
         };
         return simpleError;
     };
+    /**
+ * Executes a PUT request to the specified URL with the given data.
+ *
+ * @template D The type of the request payload.
+ * @template R The expected type of the response data.
+ * @param {string} url - The URL to send the PUT request to.
+ * @param {D} [data] - The payload to be sent in the request body.
+ * @param {Record<string, string>} [headers] - Optional additional headers to include in the request.
+ * @returns {Promise<R>} A promise resolving to the response data of type R.
+ * 
+ * @throws {Error} Throws an error if the request fails. The error will be formatted by `handleError`.
+ */ async put(url, data, headers) {
+        const config = {
+            headers: this.mergeHeaders(headers)
+        };
+        try {
+            const response = await this.api.put(url, data, config);
+            return response.data;
+        } catch (error) {
+            throw this.handleError(error);
+        }
+    }
 }
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_refresh__.registerExports(module, globalThis.$RefreshHelpers$);
@@ -117,7 +139,7 @@ class AuthApi extends __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$ser
     /**
    * Функция выхода из системы с удалением токена с базы
    */ async logout() {
-        const response = await this.post("/api/auth/token/logout/", {});
+        const response = await this.post("/api/auth/v1/logout/", {});
         return response;
     }
     /**
@@ -176,15 +198,17 @@ class AuthApi extends __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$ser
         }
         return response;
     }
+    async updateProfile(data) {
+        const response = await this.put("/api/auth/v1/users/", data, {
+            "Content-Type": "multipart/form-data"
+        });
+        return response;
+    }
     /**
    * Смена пароля.
    */ async changePassword(data) {
-        try {
-            const response = await this.post("/api/users/set_password/", data);
-            return response;
-        } catch (error) {
-            return error;
-        }
+        const response = await this.post("/api/users/set_password/", data);
+        return response;
     }
 }
 const __TURBOPACK__default__export__ = new AuthApi();
@@ -260,10 +284,10 @@ const AuthProvider = ({ children })=>{
             loading,
             user
         },
-        children: !loading && children
+        children: children
     }, void 0, false, {
         fileName: "[project]/src/context/AuthProvider.tsx",
-        lineNumber: 53,
+        lineNumber: 54,
         columnNumber: 5
     }, this);
 };

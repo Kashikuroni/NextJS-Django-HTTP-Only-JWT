@@ -3,6 +3,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import api from "@/services/backend-api/authApi";
 import { User } from "./AuthProvider.types"
+import { acceptUrls, loginUrl } from "@/services/constants/urls";
 
 type AuthContextType = {
   isAuthenticated: boolean;
@@ -19,12 +20,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
   const pathname = usePathname();
 
-  const acceptUrl = ["/auth/login", "/auth/register"];
-
   useEffect(() => {
     (async () => {
       setLoading(true)
-      if (acceptUrl.includes(pathname)) {
+      if (acceptUrls.includes(pathname)) {
         setLoading(false);
         return;
       }
@@ -41,7 +40,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           setUser(userData)
           setIsAuthenticated(true);
         } catch {
-          router.push("/auth/login/");
+          router.push(loginUrl);
         }
       } finally {
         setLoading(false);
@@ -51,7 +50,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <AuthContext.Provider value={{ isAuthenticated, loading, user }}>
-      {!loading && children}
+      {children}
     </AuthContext.Provider>
   );
 };

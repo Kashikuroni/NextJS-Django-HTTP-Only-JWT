@@ -5,6 +5,7 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.parsers import MultiPartParser, FormParser
 
 from users.types import LoginValidatedData, RefreshValidatedData
 from users.serializers import (
@@ -222,6 +223,7 @@ class CurrentUserView(APIView):
     This endpoint returns the details of the currently authenticated user.
     """
     permission_classes = [IsAuthenticated]
+    parser_classes = [MultiPartParser, FormParser]
 
     def get(self, request):
         """
@@ -237,5 +239,14 @@ class CurrentUserView(APIView):
             Response: A JSON response containing
                       the user's data with status 200.
         """
-        serializer = UserSerializer(request.user)
+        serializer = UserSerializer(request.user, context={"request": request})
         return Response(serializer.data, status=200)
+
+    def put(self, request):
+        """
+        Update the authenticated user's data.
+        """
+        serializer = UserSerializer(request.user, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)
